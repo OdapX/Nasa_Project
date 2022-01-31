@@ -7,7 +7,7 @@ const launch = {
   Mission: "apolo",
   Rocket: "FT-787",
   Destination: "Mars",
-  Customer: ["SpaceX", "NASA"],
+  Customers: ["SpaceX", "NASA"],
   upcoming: true,
   success: true,
 };
