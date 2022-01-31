@@ -1,7 +1,7 @@
 const launches = new Map();
 
-const last_Num = 0;
-const launch = {
+let last_Num = 0;
+const launch0 = {
   Num_launch: 0,
   Date: new Date("october 10, 2025"),
   Mission: "apolo",
@@ -12,7 +12,7 @@ const launch = {
   success: true,
 };
 
-launches.set(launch.Num_launch, launch);
+launches.set(launch0.Num_launch, launch0);
 
 function GetLaunches() {
   return Array.from(launches.values()).sort((a, b) => {

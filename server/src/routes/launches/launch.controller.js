@@ -6,8 +6,24 @@ function httpGetLaunches(req, res) {
 
 function httpPostLaunch(req, res) {
   const launch = req.body;
+
+  // Validation before posting
+
+  if (
+    !launch.Date ||
+    !launch.Destination ||
+    !launch.Rocket ||
+    !launch.Mission
+  ) {
+    console.log("first");
+    return res.status(400).json({ message: "Missing launch informations" });
+  }
   launch.Date = new Date(launch.Date);
-  addLaunch(launch);
+  if (launch.Date.toString() == "invalid date") {
+    return res.status(400).json({ message: "Invalid  Date " });
+  }
+  AddLaunch(launch);
+  res.status(201).json({ message: "Launch added successfully" });
 }
 
 module.exports = { httpGetLaunches, httpPostLaunch };

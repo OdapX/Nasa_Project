@@ -11,7 +11,7 @@ app.use(
     origin: "http://localhost:3000",
   })
 );
-
+app.use(express.json());
 /*  Serve the website after deploy */
 app.use(express.static(path.join(__dirname, ".", "..", "Client")));
 
