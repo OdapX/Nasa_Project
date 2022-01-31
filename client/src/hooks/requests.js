@@ -25,7 +25,7 @@ async function httpGetLaunches() {
 }
 
 async function httpSubmitLaunch(launch) {
-  await fetch(`${URL}/launches`, {
+  const response = await fetch(`${URL}/launches`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -36,13 +36,9 @@ async function httpSubmitLaunch(launch) {
       Mission: launch.mission,
       Destination: launch.Destination,
     }),
-  })
-    .then((res) => {
-      console.log(res.body);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  });
+
+  return response;
 }
 
 async function httpAbortLaunch(id) {

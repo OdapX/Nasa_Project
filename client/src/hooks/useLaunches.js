@@ -32,8 +32,9 @@ function useLaunches(onSuccessSound, onAbortSound, onFailureSound) {
         Destination,
       });
 
-      // TODO: Set success based on response.
-      const success = false;
+      let success = false;
+      response.status == 201 ? (success = true) : (success = false);
+
       if (success) {
         getLaunches();
         setTimeout(() => {
