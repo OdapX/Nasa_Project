@@ -25,6 +25,7 @@ async function httpGetLaunches() {
 }
 
 async function httpSubmitLaunch(launch) {
+  let err = false;
   const response = await fetch(`${URL}/launches`, {
     method: "POST",
     headers: {
@@ -36,14 +37,29 @@ async function httpSubmitLaunch(launch) {
       Mission: launch.mission,
       Destination: launch.Destination,
     }),
+  }).catch((error) => {
+    err = true;
   });
 
+  if (err) {
+    return { status: 400 };
+  }
   return response;
 }
 
 async function httpAbortLaunch(id) {
-  // TODO: Once API is ready.
-  // Delete launch with given ID.
+  let err = false;
+  const response = await fetch(`${URL}/launches/${id}`, {
+    method: "DELETE",
+  }).catch(() => {
+    err = true;
+  });
+  if (err) {
+    return {
+      ok: false,
+    };
+  }
+  return response;
 }
 
 export { httpGetPlanets, httpGetLaunches, httpSubmitLaunch, httpAbortLaunch };

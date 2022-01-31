@@ -26,7 +26,7 @@ function AddLaunch(launch) {
     last_Num,
     Object.assign(launch, {
       Num_launch: last_Num,
-      Customer: ["SpaceX", "NASA"],
+      Customers: ["SpaceX", "NASA"],
       upcoming: true,
       success: true,
     })
@@ -34,7 +34,19 @@ function AddLaunch(launch) {
   console.log("done");
 }
 
+function AbortLaunch(Num_Launch) {
+  try {
+    const launch = launches.get(Num_Launch);
+    launch.success = false;
+    launch.upcoming = false;
+    return launch;
+  } catch (e) {
+    return {};
+  }
+}
+
 module.exports = {
   GetLaunches,
   AddLaunch,
+  AbortLaunch,
 };

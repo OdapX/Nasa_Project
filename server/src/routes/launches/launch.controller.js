@@ -1,4 +1,8 @@
-const { GetLaunches, AddLaunch } = require("../../models/launch.model");
+const {
+  GetLaunches,
+  AddLaunch,
+  AbortLaunch,
+} = require("../../models/launch.model");
 
 function httpGetLaunches(req, res) {
   return res.status(200).json(GetLaunches());
@@ -26,4 +30,14 @@ function httpPostLaunch(req, res) {
   res.status(201).json({ message: "Launch added successfully" });
 }
 
-module.exports = { httpGetLaunches, httpPostLaunch };
+function httpAbortLaunch(req, res) {
+  const Num_Launch = +req.params.id;
+
+  const launch = AbortLaunch(Num_Launch);
+  if (launch) {
+    return res.status(200).json(launch);
+  }
+  return res.status(404).json({ error: "iLaunch Number not found" });
+}
+
+module.exports = { httpGetLaunches, httpPostLaunch, httpAbortLaunch };
