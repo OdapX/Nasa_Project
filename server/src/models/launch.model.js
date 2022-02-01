@@ -3,7 +3,7 @@ const launches = new Map();
 let last_Num = 0;
 const launch0 = {
   Num_launch: 0,
-  Date: new Date("october 10, 2025"),
+  Date: new Date("october 10, 2025").toString(),
   Mission: "apolo",
   Rocket: "FT-787",
   Destination: "Mars",
@@ -22,16 +22,16 @@ function GetLaunches() {
 
 function AddLaunch(launch) {
   last_Num++;
-  launches.set(
-    last_Num,
-    Object.assign(launch, {
-      Num_launch: last_Num,
-      Customers: ["SpaceX", "NASA"],
-      upcoming: true,
-      success: true,
-    })
-  );
-  console.log("done");
+  launch.Date = launch.Date.toString();
+  new_launch = Object.assign(launch, {
+    Num_launch: last_Num,
+    Customers: ["SpaceX", "NASA"],
+    upcoming: true,
+    success: true,
+  });
+  launches.set(last_Num, new_launch);
+
+  return new_launch;
 }
 
 function AbortLaunch(Num_Launch) {
@@ -41,7 +41,7 @@ function AbortLaunch(Num_Launch) {
     launch.upcoming = false;
     return launch;
   } catch (e) {
-    return {};
+    return { error: "not found" };
   }
 }
 

@@ -6,8 +6,8 @@
   "scripts": {
     "start": "SET PORT=8000 && node src/server.js",
     "dev-watch": "SET PORT=5000 && nodemon  src/server.js --watch",
-    "start-cluster":"SET PORT=5000 && pm2 start src/server.js -i max",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start-cluster": "SET PORT=5000 && pm2 start src/server.js -i max",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +19,7 @@
     "pm2": "^5.1.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "supertest": "^6.2.2"
   }
 }
