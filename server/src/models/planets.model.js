@@ -1,7 +1,8 @@
 const path = require("path");
+const fs = require("fs");
 
 const { parse } = require("csv-parse");
-const fs = require("fs");
+const planets = require("./planets.mongo");
 
 const habitablePlanets = [];
 
@@ -33,13 +34,7 @@ function loadData() {
         reject(err);
       })
       .on("end", () => {
-        console.log(
-          habitablePlanets.map((planet) => {
-            return planet["kepler_name"];
-          })
-        );
         console.log(`${habitablePlanets.length} habitable planets found!`);
-
         resolve();
       });
   });
