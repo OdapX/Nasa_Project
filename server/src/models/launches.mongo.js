@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const Launch_Schema = new mongoose.Schema({
   Num_launch: {
-    type: number,
+    type: Number,
     required: true,
   },
   Launch_Date: {
@@ -26,11 +26,11 @@ const Launch_Schema = new mongoose.Schema({
     required: true,
   },
   upcoming: {
-    type: boolean,
+    type: Boolean,
     default: true,
   },
   success: {
-    type: boolean,
+    type: Boolean,
     default: true,
   },
 });

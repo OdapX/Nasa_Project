@@ -32,7 +32,7 @@ async function httpSubmitLaunch(launch) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      Date: launch.date,
+      launchDate: launch.launchDate,
       Rocket: launch.rocket,
       Mission: launch.mission,
       Destination: launch.Destination,

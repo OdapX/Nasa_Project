@@ -4,11 +4,11 @@ const {
   AbortLaunch,
 } = require("../../models/launch.model");
 
-function httpGetLaunches(req, res) {
-  return res.status(200).json(GetLaunches());
+async function httpGetLaunches(req, res) {
+  return res.status(200).json(await GetLaunches());
 }
 
-function httpPostLaunch(req, res) {
+async function httpPostLaunch(req, res) {
   const launch = req.body;
 
   /* Validation before posting*/
@@ -23,24 +23,20 @@ function httpPostLaunch(req, res) {
     return res.status(400).json({ message: "Missing launch informations" });
   }
 
-  launch.Date = new Date(launch.Date);
-
-  //Handling Invalid date format
-  if (launch.Date.toString() == "Invalid Date") {
-    return res.status(400).json({ message: "Invalid  Date Format" });
-  }
-
   //Post the launch if all the above are ok
-  const new_Launch = AddLaunch(launch);
-  res
-    .status(201)
-    .json(Object.assign(new_Launch, { message: "Created Successfully" }));
+  await AddLaunch(launch)
+    .then(() => {
+      return res.status(201);
+    })
+    .catch((err) => {
+      return res.status(400).json({ message: "Invalid  Date Format" });
+    });
 }
 
-function httpAbortLaunch(req, res) {
+async function httpAbortLaunch(req, res) {
   const Num_Launch = +req.params.id;
 
-  const launch = AbortLaunch(Num_Launch);
+  const launch = await AbortLaunch(Num_Launch);
   if (!launch.error) {
     return res.status(200).json(launch);
   }

@@ -1,51 +1,52 @@
-//const launches = require("./launches.mongo");
+const launches = require("./launches.mongo");
+const planets = require("./planets.mongo");
 
-const launches = new Map();
-
-let last_Num = 0;
-const launch0 = {
+const launch = {
   Num_launch: 0,
   Date: new Date("october 10, 2025").toString(),
   Mission: "apolo",
   Rocket: "FT-787",
-  Destination: "Mars",
+  Destination: "Kepler-1652 b",
   Customers: ["SpaceX", "NASA"],
   upcoming: true,
   success: true,
 };
 
-launches.set(launch0.Num_launch, launch0);
-
-function GetLaunches() {
-  return Array.from(launches.values()).sort((a, b) => {
-    return a.Num_launch - b.Num_launch;
-  });
+async function GetLaunches() {
+  return await launches.find(
+    {},
+    {
+      _id: 0,
+      _v: 0,
+    }
+  );
 }
 
-function AddLaunch(launch) {
-  last_Num++;
-  launch.Date = launch.Date.toString();
-  new_launch = Object.assign(launch, {
-    Num_launch: last_Num,
-    Customers: ["SpaceX", "NASA"],
-    upcoming: true,
-    success: true,
-  });
-  launches.set(last_Num, new_launch);
-
-  return new_launch;
-}
-
-function AbortLaunch(Num_Launch) {
-  try {
-    const launch = launches.get(Num_Launch);
-    launch.success = false;
-    launch.upcoming = false;
-    return launch;
-  } catch (e) {
-    return { error: "not found" };
+async function AddLaunch(launch) {
+  const planet = planets.findOne({ keplerName: launch.Destination }, {});
+  if (!planet) {
+    throw new Error("Planet not found");
   }
+  await SaveLaunch(launch);
 }
+
+async function SaveLaunch(launch) {
+  await launches
+    .updateOne(
+      {
+        Num_launch: launch.Num_launch,
+      },
+      launch,
+      {
+        upsert: true,
+      }
+    )
+    .catch((e) => {
+      console.error(`error at saving launch ${e}`);
+    });
+}
+
+async function AbortLaunch(Num_Launch) {}
 
 module.exports = {
   GetLaunches,
