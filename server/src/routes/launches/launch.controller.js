@@ -22,14 +22,17 @@ async function httpPostLaunch(req, res) {
   ) {
     return res.status(400).json({ message: "Missing launch informations" });
   }
-  //Post the launch if all the above are ok
+  if (new Date(launch.Launch_Date).toString() === "Invalid Date") {
+    return res.status(400).json({ message: "Invalid  Date Format" });
+  }
 
+  //Post the launch if all the above are ok
   await AddLaunch(launch)
     .then(() => {
       return res.status(201).json({ message: "created successfully" });
     })
     .catch((err) => {
-      return res.status(400).json({ message: "Invalid  Date Format" });
+      return res.status(400).json({ message: "Launch was not saved" });
     });
 }
 

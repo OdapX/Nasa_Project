@@ -3,24 +3,16 @@ const mongoose = require("mongoose");
 //const {Worker, isMainThread} = reqire("worker_thread")
 const app = require("./app");
 const { loadData } = require("./models/planets.model");
-
+const { ConnectToDB } = require("./utils/Mongo");
 const PORT = process.env.PORT || 8000;
-const DB_URL =
-  "mongodb+srv://odap:benzover145145@nasacluster.mpow6.mongodb.net/NasaCluster?retryWrites=true&w=majority";
 
 const server = http.createServer(app);
 
 async function startServer() {
-  await mongoose
-    .connect(DB_URL)
-    .then((res) => {
-      console.log("DB_Connected");
-    })
-    .catch((err) => {
-      console.error(err);
-    });
+  await ConnectToDB();
 
   await loadData();
+
   server.listen(PORT, () => {
     console.log(`running on port ${PORT}`);
   });
