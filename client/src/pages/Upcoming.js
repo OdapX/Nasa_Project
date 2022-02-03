@@ -30,7 +30,7 @@ const Upcoming = (props) => {
               </Clickable>
             </td>
             <td>{launch.Num_launch}</td>
-            <td>{new Date(launch.Date).toDateString()}</td>
+            <td>{new Date(launch.Launch_Date).toDateString()}</td>
             <td>{launch.Mission}</td>
             <td>{launch.Rocket}</td>
             <td>{launch.Destination}</td>

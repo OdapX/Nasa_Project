@@ -1,6 +1,6 @@
 const http = require("http");
 const mongoose = require("mongoose");
-
+//const {Worker, isMainThread} = reqire("worker_thread")
 const app = require("./app");
 const { loadData } = require("./models/planets.model");
 

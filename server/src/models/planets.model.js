@@ -51,15 +51,13 @@ async function SavePlanet(planet) {
     });
 }
 async function getPlanets() {
-  const a = await planets.find(
+  return await planets.find(
     {},
     {
       _id: 0,
       __v: 0,
     }
   );
-  console.log(a);
-  return a;
 }
 
 module.exports = { getPlanets, loadData };

@@ -27,6 +27,12 @@ async function AddLaunch(launch) {
   if (!planet) {
     throw new Error("Planet not found");
   }
+  const New_Num_launch = (await LastElement()) + 1;
+  console.log(`newwww ${New_Num_launch}`);
+  Object.assign(launch, {
+    Num_launch: New_Num_launch,
+    Customers: ["NASA", "SpaceX"],
+  });
   await SaveLaunch(launch);
 }
 
@@ -45,8 +51,23 @@ async function SaveLaunch(launch) {
       console.error(`error at saving launch ${e}`);
     });
 }
+async function LastElement() {
+  //if there is still no launches in the database default to 1
+  const lastElement = await launches.findOne().sort("-Num_launch");
 
-async function AbortLaunch(Num_Launch) {}
+  return lastElement ? lastElement.Num_launch : 0;
+}
+async function AbortLaunch(Num_Launch) {
+  await launches
+    .updateOne(
+      { Num_Launch: Num_Launch },
+      { upcoming: false, success: false },
+      { upsert: false }
+    )
+    .catch((e) => {
+      throw new Error(`Couldn't abort ${e}`);
+    });
+}
 
 module.exports = {
   GetLaunches,
