@@ -11,11 +11,11 @@ async function GetLaunches() {
   );
 }
 
+async function PlanetExits(planetName) {
+  const planet = await planets.findOne({ planetName: planetName }, {});
+  if (!planet) throw new Error("Planet not found");
+}
 async function AddLaunch(launch) {
-  const planet = planets.findOne({ keplerName: launch.Destination }, {});
-  if (!planet) {
-    throw new Error("Planet not found");
-  }
   const New_Num_launch = (await LastElement()) + 1;
 
   Object.assign(launch, {
@@ -37,7 +37,7 @@ async function SaveLaunch(launch) {
       }
     )
     .catch((e) => {
-      console.error(`error at saving launch ${e}`);
+      throw new Error(e);
     });
 }
 async function LastElement() {
@@ -47,21 +47,17 @@ async function LastElement() {
   return lastElement ? lastElement.Num_launch : 0;
 }
 async function AbortLaunch(Num_Launch) {
-  const response = await launches
-    .updateOne(
-      { Num_launch: Num_Launch },
-      { upcoming: false, success: false },
-      { upsert: false }
-    )
-    .catch((e) => {
-      console.log(e);
-      throw new Error(`Couldn't abort ${e}`);
-    });
-  return response;
+  const aborted = await launches.updateOne(
+    { Num_launch: Num_Launch },
+    { upcoming: false, success: false },
+    { upsert: false }
+  );
+  if (aborted.ok != 1) throw new Error("not found");
 }
 
 module.exports = {
   GetLaunches,
   AddLaunch,
   AbortLaunch,
+  PlanetExits,
 };
