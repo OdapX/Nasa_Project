@@ -35,14 +35,13 @@ async function httpPostLaunch(req, res) {
 
 async function httpAbortLaunch(req, res) {
   const Num_Launch = +req.params.id;
-
-  await AbortLaunch(Num_Launch)
-    .then(() => {
-      return res.status(200).json(launch);
-    })
-    .catch(() => {
-      return res.status(404).json({ error: "Id Launch Number not found" });
-    });
+  try {
+    await AbortLaunch(Num_Launch);
+    return res.status(200).json({ message: "Aborted successfully" });
+  } catch (err) {
+    console.log(err);
+    return res.status(404).json({ error: "Id Launch Number not found" });
+  }
 }
 
 module.exports = { httpGetLaunches, httpPostLaunch, httpAbortLaunch };

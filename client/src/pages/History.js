@@ -9,12 +9,12 @@ const History = (props) => {
         return (
           <tr key={String(launch.flightNumber)}>
             <td>
-              <span style={{ color: launch.success ? "greenyellow" : "red" }}>
-                █
-              </span>
+              <span
+                style={{ color: launch.success ? "greenyellow" : "red" }}
+              ></span>
             </td>
             <td>{launch.Num_launch}</td>
-            <td>{new Date(launch.Date).toDateString()}</td>
+            <td>{new Date(launch.Launch_Date).toDateString()}</td>
             <td>{launch.Mission}</td>
             <td>{launch.Rocket}</td>
             <td>{launch.Customers?.join(", ")}</td>
