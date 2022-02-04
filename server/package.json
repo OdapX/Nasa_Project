@@ -12,15 +12,16 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "jest":{
-     "testEnvironment":"node",
-     "testTimeout": 90000
+  "jest": {
+    "testEnvironment": "node",
+    "testTimeout": 90000
   },
   "dependencies": {
     "cors": "^2.8.5",
     "csv-parse": "^5.0.4",
     "express": "^4.17.2",
     "mongoose": "^6.1.10",
+    "node-fetch": "^3.2.0",
     "pm2": "^5.1.2"
   },
   "devDependencies": {
