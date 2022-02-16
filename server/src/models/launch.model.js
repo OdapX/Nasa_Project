@@ -1,6 +1,5 @@
-const launches = require("./launches.mongo");
+const { launches } = require("./launches.mongo");
 const planets = require("./planets.mongo");
-const fetch = require("node-fetch");
 
 async function GetLaunches() {
   return await launches.find(
@@ -23,9 +22,9 @@ async function AddLaunch(launch) {
     Num_launch: New_Num_launch,
     Customers: ["NASA", "SpaceX"],
   });
+
   await SaveLaunch(launch);
 }
-
 
 async function SaveLaunch(launch) {
   await launches
@@ -39,7 +38,8 @@ async function SaveLaunch(launch) {
       }
     )
     .catch((e) => {
-      throw new Error(e);
+      //throw new Error(e);
+      console.log(e);
     });
 }
 async function LastElement() {
@@ -52,7 +52,7 @@ async function AbortLaunch(Num_Launch) {
   const aborted = await launches.updateOne(
     { Num_launch: Num_Launch },
     { upcoming: false, success: false },
-    { upsert: false }
+    { upsert: true }
   );
   if (aborted.ok != 1) throw new Error("not found");
 }

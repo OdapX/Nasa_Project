@@ -8,7 +8,9 @@ const {
 const Validate_launch_data = require("./launch.validation");
 
 async function httpGetLaunches(req, res) {
-  return res.status(200).json(await GetLaunches());
+  const a = await GetLaunches();
+  console.log(a);
+  return res.status(200).json(a);
 }
 
 async function httpPostLaunch(req, res) {
@@ -29,6 +31,7 @@ async function httpPostLaunch(req, res) {
       return res.status(201).json({ message: "created successfully" });
     })
     .catch((err) => {
+      console.log(err);
       return res.status(500).json({ message: "Launch was not saved" });
     });
 }

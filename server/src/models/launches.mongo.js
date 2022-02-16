@@ -1,5 +1,13 @@
 const mongoose = require("mongoose");
 
+const TESTSchema = mongoose.Schema({
+  data: {
+    type: String,
+    default: "work you son of",
+  },
+  launch: { type: mongoose.Schema.Types.ObjectId, ref: "Launch" },
+});
+
 const Launch_Schema = new mongoose.Schema({
   Num_launch: {
     type: Number,
@@ -15,7 +23,7 @@ const Launch_Schema = new mongoose.Schema({
   },
   Rocket: {
     type: String,
-    requied: true,
+    required: true,
   },
   Customers: {
     type: [String],
@@ -33,6 +41,13 @@ const Launch_Schema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+
+  // test: [TESTSchema],
 });
 
-module.exports = mongoose.model("Launch", Launch_Schema);
+const launches = mongoose.model("Launch", Launch_Schema);
+const tests = mongoose.model("test", TESTSchema);
+module.exports = {
+  launches,
+  tests,
+};
