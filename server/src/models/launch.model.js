@@ -21,6 +21,7 @@ async function AddLaunch(launch) {
   Object.assign(launch, {
     Num_launch: New_Num_launch,
     Customers: ["NASA", "SpaceX"],
+    test: { data: "dfdfdfdfffd" },
   });
 
   await SaveLaunch(launch);

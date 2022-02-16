@@ -42,7 +42,7 @@ const Launch_Schema = new mongoose.Schema({
     default: true,
   },
 
-  // test: [TESTSchema],
+  test: TESTSchema,
 });
 
 const launches = mongoose.model("Launch", Launch_Schema);
