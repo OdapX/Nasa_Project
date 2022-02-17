@@ -44,10 +44,19 @@
 //     return;
 //   });
 
-const s = "addffdff $dfdfdf dfdff";
-const L = s.split(" ");
-L.forEach((e) => {
-  if (e.startsWith("$")) {
-    console.log(e);
-  }
-});
+const s = "aew $command xcc";
+
+const getCommand = (input) => {
+  const L = input.split(" ");
+  let command = "";
+  L.forEach((e) => {
+    if (e.startsWith("$")) {
+      command = e.substring(1);
+    }
+  });
+  return command;
+};
+
+console.log(getCommand(s));
+
+//get(e from subcategory in database)
