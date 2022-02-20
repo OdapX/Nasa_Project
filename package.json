@@ -16,7 +16,8 @@
     "deploy": "npm-run-all --serial build-client server-start",
     "cluster-deploy": "npm-run-all --serial build-client start-clustered-server",
     "test-server": "npm test --prefix server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test-client":"npm test --prefix client",
+    "test": "npm run test-server "
   },
   "repository": {
     "type": "git",
