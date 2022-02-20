@@ -3,11 +3,13 @@ const app = require("../../app");
 const { ConnectToDB, DisconnectFromDB } = require("../../utils/Mongo");
 
 describe("Testing launches API", () => {
-  beforeAll(async () => {
-    await ConnectToDB();
+  beforeAll((done) => {
+    ConnectToDB();
+    done();
   });
-  afterAll(async () => {
-    await DisconnectFromDB();
+  afterAll((done) => {
+    DisconnectFromDB();
+    done();
   });
   //Test GET/Launches
   describe("Testing GET/Launches", () => {
