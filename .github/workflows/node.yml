@@ -22,7 +22,7 @@ jobs:
       - name: Mock out mongo db
         uses: supercharge/mongodb-github-action@1.7.0
         with:
-          mongodb-version: ${{matrix.node-version}}
+          mongodb-version: ${{matrix.mongodb-version}}
       - run: npm install
       - run: npm run build --prefix client
       - run: npm run test
