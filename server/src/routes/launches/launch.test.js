@@ -1,10 +1,12 @@
 const request = require("supertest");
 const app = require("../../app");
+const { loadData } = require("../../models/planets.model.js");
 const { ConnectToDB, DisconnectFromDB } = require("../../utils/Mongo");
 
 describe("Testing launches API", () => {
   beforeAll(async () => {
     await ConnectToDB();
+    await loadData();
   });
   afterAll(async () => {
     await DisconnectFromDB();
