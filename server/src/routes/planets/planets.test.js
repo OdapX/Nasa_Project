@@ -3,13 +3,11 @@ const app = require("../../app");
 const { ConnectToDB, DisconnectFromDB } = require("../../utils/Mongo");
 
 describe("Testing GET/ Planets", () => {
-  beforeAll((done) => {
-    ConnectToDB();
-    done();
+  beforeAll(async () => {
+    await ConnectToDB();
   });
-  afterAll((done) => {
-    DisconnectFromDB();
-    done();
+  afterAll(async () => {
+    await DisconnectFromDB();
   });
   test("Expected Status 200", async () => {
     request(app)
@@ -17,4 +15,5 @@ describe("Testing GET/ Planets", () => {
       .expect("Content-Type", "application/json")
       .expect(200);
   });
+  done();
 });
