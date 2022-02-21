@@ -8,7 +8,7 @@ jobs:
   build:
     env:
       CI: true
-      -name : DB_URL
+      -name: DB_URL
        value: "mongodb://localhost/nasa" 
     strategy:
       matrix:
