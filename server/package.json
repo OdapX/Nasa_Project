@@ -14,7 +14,7 @@
   "license": "ISC",
   "jest": {
     "testEnvironment": "node",
-    "testTimeout": 90000
+    "testTimeout": 100000
   },
   "dependencies": {
     "cors": "^2.8.5",

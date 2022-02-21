@@ -16,7 +16,7 @@
     "deploy": "npm-run-all --serial build-client server-start",
     "cluster-deploy": "npm-run-all --serial build-client start-clustered-server",
     "test-server": "npm test --prefix server",
-    "test-client":"npm test --prefix client",
+    "test-client": "npm test --prefix client",
     "test": "npm run test-server "
   },
   "repository": {
@@ -34,6 +34,7 @@
     "npm-run-all": "^4.1.5"
   },
   "dependencies": {
+    "dotenv": "^16.0.0",
     "mongodb": "^4.3.1"
   }
 }

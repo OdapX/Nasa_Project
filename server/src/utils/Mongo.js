@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
-
-const DB_URL =
-  "mongodb+srv://odap:benzover145145@nasacluster.mpow6.mongodb.net/NasaCluster?retryWrites=true&w=majority";
+require("dotenv").config();
+const DB_URL = process.env.DB_URL;
 
 async function ConnectToDB() {
   await mongoose.connect(DB_URL).catch((err) => {
