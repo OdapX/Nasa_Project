@@ -17,7 +17,6 @@ describe("Testing launches API", () => {
         .expect("Content-Type", /json/)
         .expect(200);
     });
-    done();
   });
 
   //Test Post/Launches
@@ -67,7 +66,6 @@ describe("Testing launches API", () => {
 
       expect(response.body.message).toMatch("Invalid  Date Format");
     });
-    done();
   });
 
   //Test GET/DELETE /Launches/:id
@@ -79,6 +77,5 @@ describe("Testing launches API", () => {
       const response = await request(app).delete("/launches/1000").expect(404);
       expect(response.body.error).toMatch("Id Launch Number not found");
     });
-    done();
   });
 });

@@ -15,5 +15,4 @@ describe("Testing GET/ Planets", () => {
       .expect("Content-Type", "application/json")
       .expect(200);
   });
-  done();
 });
