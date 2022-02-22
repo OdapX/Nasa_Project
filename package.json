@@ -12,7 +12,7 @@
     "install-server": "npm  install --prefix server",
     "install-client": "npm  install --prefix client",
     "install": "npm-run-all --serial install-server install-client ",
-    "build-client": "SET BUILD_PATH=../server/Client && npm run build --prefix client",
+    "build-client": "BUILD_PATH=../server/Client && npm run build --prefix client",
     "deploy": "npm-run-all --serial build-client server-start",
     "cluster-deploy": "npm-run-all --serial build-client start-clustered-server",
     "test-server": "npm test --prefix server",
