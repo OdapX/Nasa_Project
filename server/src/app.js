@@ -7,13 +7,19 @@ const launchRouter = require("./routes/launches/launch.router");
 const app = express();
 app.use(express.json());
 app.use(
-  cors({
-    origin: "*",
-  })
+	cors({
+		origin: "*",
+	})
 );
 app.use(express.json());
 /*  Serve the website after deploy */
-app.use(express.static(path.join(__dirname, ".", "..", "Client")));
+// app.use(
+// 	express.static(path.join(__dirname, ".", "..", "client", "index.html"))
+// );
+
+// app.get("/", (req, res) => {
+// 	res.sendFile(path.join(__dirname, ".", "..", "client", "index.html"));
+// });
 
 app.use(planetsRouter);
 

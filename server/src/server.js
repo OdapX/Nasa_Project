@@ -4,18 +4,18 @@ const mongoose = require("mongoose");
 const app = require("./app");
 const { loadData } = require("./models/planets.model");
 const { ConnectToDB } = require("./utils/Mongo");
-const PORT = process.env.PORT || 8000;
+const PORT = 8000;
 
 const server = http.createServer(app);
 
 async function startServer() {
-  await ConnectToDB();
+	await ConnectToDB();
 
-  await loadData();
+	await loadData();
 
-  server.listen(PORT, () => {
-    console.log(`running on port ${PORT}`);
-  });
+	server.listen(PORT, () => {
+		console.log(`running on port ${PORT}`);
+	});
 }
 
 startServer();
